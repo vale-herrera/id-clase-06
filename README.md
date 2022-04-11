@@ -2,43 +2,72 @@
 
 ### Clase 06 → 11/04/2022
 
-**JavaScript es un lenguaje de programación con el que las páginas web se hacen interactivas mediante el control de cada navegador web y su Modelo de Objetos de Documento ([DOM; Document Object Model](https://es.wikipedia.org/wiki/Document_Object_Model))**: Con JavaScript se controla, a través de pequeños programas (o *scripts*), la "comprensión de lectura" del navegador web. Por este motivo pueden haber diferencias entre **ver código fuente** e [**inspeccionar elementos**](https://support.hostinger.es/es/articles/2333029-como-inspeccionar-los-elementos-del-sitio-web).
+**[JavaScript](https://developer.mozilla.org/es/docs/Learn/JavaScript/First_steps/What_is_JavaScript) es un lenguaje de programación con el que las páginas web se hacen interactivas mediante el control de cada navegador y su Modelo de Objetos de Documento ([DOM; Document Object Model](https://es.wikipedia.org/wiki/Document_Object_Model))**. Si lo simplificamos: Con JavaScript se controla la "comprensión de lectura" del navegador web.
 
-Dominar JavaScript, o cualquier lenguaje de programación, toma más tiempo de estudio y práctica del que puede tomarnos dominar un lenguaje de descripción. Esto no solo aplica a diseñadores, también aplica a programadores; por esta razón, es común verles programar con ayudar de *frameworks* y *libraries*:
+Dominar JavaScript, o cualquier lenguaje de programación, toma más tiempo de estudio y práctica del que puede tomarnos dominar un lenguaje o un dialecto de descripción. Esto aplica también para programadores; por esta razón es común que expertos en programación usen *libraries* y *frameworks*, pero es raro que confiesen el uso de *plugins*:
 
-- una *library* ofrece ingredientes seleccionados y preparados para que "cocines" un plato específico con el menor esfuerzo posible. 
+- una *library* ofrece algo como ingredientes seleccionados y preparados para que cocines un plato específico con el menor esfuerzo posible. 
 
-- un *framework* es una cocina dispuesta para que prepares un tipo de comida específica, con eficacia y eficiencia (una cocina de restaurant que ofrece sushi es distinta de una de restaurant de pasas o parrilladas).
+- un *framework* es como una cocina dispuesta para que prepares un tipo de comida específica (una cocina de restaurant que ofrece sushi es distinta de una de restaurant de pastas o parrilladas).
 
-Pero si no sabemos hervir agua ni diferenciar sal de azúcar, difícilmente podemos sacar provecho de cualquier ayuda para cocinar.
+- un *plugin* es una solución ajena y hermética: *No sé quién lo hizo ni cómo lo hizo, pero creo que es comestible*. Con una confesión de ese tipo, ningún cocinero mantendría su trabajo en un buen restaurant.
 
-Por eso vamos a partir con un pequeño programa (o *script*), el que debes copiar y pegar en la consola de JavaScript de tu navegador:
+Sigamos estirando la metáfora de la cocina: Si no sabemos hervir agua ni diferenciar sal de azúcar, difícilmente podemos sacar provecho de cualquier ayuda para cocinar hasta lo más simple: *¡No podríamos preparar ni un tecito!*
+
+**Para poder preparar algo como un tecito, vamos a partir con un pequeño programa (o *script*); copia y pega [en la consola de JavaScript](https://wise.com/es/help/articles/2954851/como-abrir-la-consola-de-tu-navegador) del navegador web lo siguiente**: 
 
 ```
-var retinal = ["size","value","texture","color","orientation","shape"]
+var retinal = ["size","value","texture","color","orientation","shape"];
 retinal.sort();
-retinal.forEach(element => console.log(element));
+retinal.forEach(x => console.log(x));
 ```
 
-En las tres línea del pequeño programa (o *script*) tenemos: 
+**En las tres línea del pequeño programa (o *script*) tenemos**: 
 
-1. Una declaración de variable de nombre `retina`, que se inicia conteniendo un arreglo con 6 cadenas de caracteres.
+1. Una declaración de variable de nombre `retinal`, que se inicia conteniendo un arreglo (*array*) con 6 cadenas (*string*) de caracteres entre comillas.
 
-2. Una reorganización alfabética del arreglo contenido por la variable de nombre `retina`, mediante el [método `sort()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+2. Una reorganización alfabética del arreglo contenido por la variable de nombre `retina`, mediante el [método `sort()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
-3. La repetición de un *log* en la consola para cada cadena en el arreglo ya ordenado alfabéticamente, mediante el [método `forEach()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+3. Con el [método `forEach()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) se repite un *log* en la consola **para cada** cadena (*string*) en el arreglo (*array*) ya ordenado alfabéticamente.
 
-Con lo dicho, ya podríamos preguntarnos: ¿Podría vincular datos a elementos dentro de un SVG? ¡Si, se puede!
-
-Hagamos algo como eso, sin alejarnos muchos del pequeño programa (o *script*) escrito más arriba. Copiemos y peguemos lo siguiente en un editor de código fuente. Una vez pegado allí, guardemos el documento como `ejemplo.html`
+**Modifiquemos la tercera línea del pequeño programa (*script*), y pongámoslo dentro de un HTML al que podemos guardar con el nombre `ejemplo-1.html`**:
 
 ```
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Un poquito de JavaScript</title>
+        <title>¡Guárdalo como HTML!</title>
+    </head>
+    <body>
+        <script>
+            var retinal = ["size","value","texture","color","orientation","shape"];
+            retinal.sort();
+            retinal.forEach(x => document.querySelector("body").innerHTML += '<p>'+ x +'</p>');
+        </script>
+    </body>
+</html>
+```
+
+Con los cambios de la tercera línea se le pide al navegador hacer lo siguiente para cada cadena (*string*) en el arreglo (*array*) ya ordenado alfabéticamente:
+
+- `document.querySelector("body")` Busca en el documento al elemento `body`.
+- `.innerHTML` Incluye algo de HTML en el elemento que ya fuiste a buscar.
+- `+=` Esto es lo que te corresponde incluir (sin borrar lo anterior).
+- `'<p>'+ x +'</p>'` Antes de cada `x` pon un etiqueta de apertura de párrafo y después una de cierre (de tal manera el HTML que se incluye cada vez es un párrafo).
+
+**Si vinculamos lo recién presentado con lo aprendido sobre [SVG](https://developer.mozilla.org/es/docs/Web/SVG/Tutorial) (que es un dialecto con elementos, muy parecido a [HTML](https://developer.mozilla.org/es/docs/Learn/Getting_started_with_the_web/HTML_basics)), ya podríamos sospechar que es posible dibujar un SVG desde una serie de datos; veamos como se puede hacer esto sin alejarnos del pequeño programa (o *script*) que venimos usando**. 
+
+Copiemos y peguemos lo que sigue en un nuevo documento creado en un editor de código fuente. Una vez pegado allí, guardemos el documento como `ejemplo-2.html`
+
+```
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>¡Guárdalo como HTML!</title>
     </head>
     <body>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
@@ -47,68 +76,111 @@ Hagamos algo como eso, sin alejarnos muchos del pequeño programa (o *script*) e
         <script>
             var retinal = ["size", "value", "texture", "color", "orientation", "shape"];
             retinal.sort();
-            retinal.forEach(function (element, i) {
-                document.querySelector("#aqui").innerHTML += '<text x="50" y="' + 20 * (i + 1) + '">' + element + "</text>";
+            retinal.forEach(function (r, n) {
+                document.querySelector("#aqui").innerHTML += '<text x="50" y="' + 20 * (n + 1) + '">' + r + '</text>';
             });
         </script>
     </body>
 </html>
 ```
 
-Si revisan el `ejemplo.html` en su navegador, verán cada cadena de caracteres del arreglo dentro de un `<text></text>` de SVG. Todos ellos están, a su vez, dentro del grupo de identidad aqui (`<g id="aqui"></g>`). Esto es algo que puedes ver dentro de la ventana del navegador y al [**inspeccionar elementos**](https://support.hostinger.es/es/articles/2333029-como-inspeccionar-los-elementos-del-sitio-web), pero no lo encontrarás al "Ver el código fuente". Porque JavaScript no modifica lo escrito por el programador, sino la "comprensión de lectura" del navegador web.
+Si revisan el `ejemplo-2.html` en su navegador, verán cada cadena de caracteres del arreglo dentro de un `<text></text>` de SVG. Todos ellos están, a su vez, dentro del grupo de identidad `aqui` (`<g id="aqui"></g>`). 
 
-Podemos trabajar con datos distintos de cadenas de caractres dentro de un arreglo. Puede ser, por ejemplo, objetos dentro de un arreglo, y dentro de cada objeto puedo tener, nuevamente, cadena de caracteres y, además, números enteros:
+Esto es algo que también pueden ver al [**inspeccionar elementos**](https://support.hostinger.es/es/articles/2333029-como-inspeccionar-los-elementos-del-sitio-web). Pero no lo encontrarás al "Ver el código fuente", porque JavaScript no modifica lo escrito por el programador, sino la "comprensión de lectura" que tiene el navegador web para lo que lee.
+
+Demos un paso más creando un nuevo documento, al que llamaremos `ejemplo-3.html`. Allí peguemos el siguiente código:
 
 ```
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Censo 2017</title>
+        <title>¡Guárdalo como HTML!</title>
     </head>
     <body>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-            <g id="grafico"></g>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250">
+            <g id="aqui"></g>
         </svg>
         <script>
-            var censo = [
-                { region: "Arica y Parinacota", poblacion: 226068 },
-                { region: "Tarapacá", poblacion: 330558 },
-                { region: "Antofagasta", poblacion: 607534 },
-                { region: "Atacama", poblacion: 286168 },
-                { region: "Coquimbo", poblacion: 757586 },
-                { region: "Valparaíso", poblacion: 1815902 },
-                { region: "Metropolitana", poblacion: 7112808 },
-                { region: "O'Higgins", poblacion: 914555 },
-                { region: "Maule", poblacion: 1044950 },
-                { region: "Ñuble", poblacion: 480609 },
-                { region: "Biobío", poblacion: 1556805 },
-                { region: "La Araucanía", poblacion: 957224 },
-                { region: "Los Ríos", poblacion: 384837 },
-                { region: "Los Lagos", poblacion: 828708 },
-                { region: "Aysén", poblacion: 103158 },
-                { region: "Magallanes", poblacion: 166533 },
+            var personajes = [
+                { nombre: "Marge", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/marge.svg" },
+                { nombre: "Homer", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/homer.svg" },
+                { nombre: "Bart", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/bart.svg" },
+                { nombre: "Lisa", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/lisa.svg" },
+                { nombre: "Maggie", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/maggie.svg" }
             ];
-            censo.forEach(function (dato, i) {
-                document.querySelector("#grafico").innerHTML += '<g transform="translate(10, '+ 17 * (i + 1) +')"><rect x="0" y="0" width="'+ (dato.poblacion/25000) +'" height="10"></rect><text x="'+((dato.poblacion/25000)+5)+'" y="7" font-size="9">'+dato.region+'</text></g>';
+            personajes.forEach((p, n) => {
+                document.getElementById("aqui").innerHTML += '<image width="200" height="200" x="'+ n * 200+'" y ="10" href="'+p.imagen+'"></image><text width="200" height="50" x="'+ ((n * 200) + 100) +'" y ="240" text-anchor="middle" font-size="2em">'+ p.nombre +'</text>';
             });
         </script>
     </body>
 </html>
 ```
 
-Copia y pega el código en un nuevo documento dentro de tu editor. Guárdalo como censo.html y aprovecha lo aprendido sobre CSS para editarlo. Una vez lo tengas editado, pasa al ejercicio. 
+En los ejemplos 1 y 2 tenemos una variable de nombre `retinal` en la que guardamos un arreglo, siendo cada elemento del arreglo una cadena de caracteres. En el `ejemplo-3.html` también tenemos una variable en la que guardamos un arreglo, pero cada elemento del arreglo en `personajes` es un objeto donde los índices son `nombre` e `imagen`, y lo que guarda cada índice es una cadena de caracteres.
+
+Podrán notar otras diferencias entre los ejemplos 2 y 3: 
+
+- `retinal.forEach(function (r, n) {…});` hace lo mismo que `personajes.forEach((p, n) => {…});`
+- `document.querySelector("#aqui")` hace lo mismo que `document.getElementById("aqui")`
+
+En este caso estamos trabajando con JavaScript, que es un lenguaje de programación, distinto de un lenguaje o un dialecto de descripción (HTML, CSS, SVG). Lo descriptivo debe ser tan estricto como lo programático. Pero lo descriptivo es conservador comparado con lo programático que [tiende a evolucionar frecuentemente](https://www.w3schools.com/js/js_versions.asp): Se proponen y estandarizan maneras de "hacer" más eficientes.
+
+También podrían preguntarse: ¿Puedo mezclar ambos ejemplo para hacer un `ejemplo-4.html`, donde tenga un listado de palabras y también a los Simpsons? La respuesta es sí. Para hacerlo deben cuidarse de la repetición de identidades, porque una identidad sólo se usa una vez dentro de un documento:
+
+```
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>¡Guárdalo como HTML!</title>
+    </head>
+    <body>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+            <g id="aca"></g>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250">
+            <g id="alla"></g>
+        </svg>
+        <script>
+            var retinal = ["size", "value", "texture", "color", "orientation", "shape"];
+            retinal.sort();
+            retinal.forEach(function (r, n) {
+                document.querySelector("#aca").innerHTML += '<text x="50" y="' + 20 * (n + 1) + '">' + r + "</text>";
+            });
+             var personajes = [
+                { nombre: "Marge", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/marge.svg" },
+                { nombre: "Homer", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/homer.svg" },
+                { nombre: "Bart", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/bart.svg" },
+                { nombre: "Lisa", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/lisa.svg" },
+                { nombre: "Maggie", imagen: "https://raw.githubusercontent.com/profesorfaco/dno075-2022-1/main/clase-06/img/maggie.svg" }
+            ];
+            personajes.forEach((p, n) => {
+                document.getElementById("alla").innerHTML += '<image width="200" height="200" x="'+ n * 200+'" y ="10" href="'+p.imagen+'"></image><text width="200" height="50" x="'+ ((n * 200) + 100) +'" y ="240" text-anchor="middle" font-size="2em">'+ p.nombre +'</text>';
+            });
+        </script>
+    </body>
+</html>
+```
+
 
 - - - - - - - 
 
 #### EJERCICIO
 
-**Hay un documento [compartido en esta carpeta](https://profesorfaco.github.io/dno075-2022-1/clase-06/) de repositorio, es un `index.html` que contiene parte del código que recién pudiste editar**. 
+**Usaremos sólo uno de los documentos [compartidos en esta carpeta](https://profesorfaco.github.io/dno075-2022-1/clase-06/) de repositorio**: 
 
-Primero adapta los cambios que hiciste en `censo.html` a la estructura de `index.html`, y luego crea un segundo gráfico, usando la misma estructura y otro dato de [la sínstesis de resultados del Censo 2017](https://www.censo2017.cl/descargas/home/sintesis-de-resultados-censo2017.pdf).
+**El [`index.html`](https://github.com/profesorfaco/dno075-2022-1/blob/main/clase-06/index.html) que contiene un arreglo con datos del CENSO 2017**. 
 
-¡Ten cuidado con la duplicación de identidades!
+Por favor cambien los datos para presentar otro asunto incluido en [la síntesis de resultados del Censo 2017](http://www.censo2017.cl/descargas/home/sintesis-de-resultados-censo2017.pdf). Y cambien colores de las barras con [la pseudoclase `:nth-child()` de CSS](https://developer.mozilla.org/es/docs/Web/CSS/:nth-child). 
+
+También corresponde modificar el título, subtítulo y párrafos de texto para darle un sentido a lo que presentan. 
+
+¡Pero [eviten escribir los párrafos tal como los escribirían para documentos impresos](https://www.nngroup.com/articles/how-users-read-on-the-web/)!
+
+Suban el index.html a GitHub. También convendía subir los cuatro ejemplos que prepararon en el mismo repositorio.
 
 - - - - - - - 
  
@@ -121,4 +193,3 @@ https://youtu.be/rr2H086z16s
 - - - - - - - -
 
 ###### [← CLASE PASADA](https://github.com/profesorfaco/dno075-2022-1/tree/main/clase-05) — [CLASE SIGUIENTE →](https://github.com/profesorfaco/dno075-2022-1/tree/main/clase-07) 
-
