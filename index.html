@@ -98,7 +98,7 @@
                 { region: "Pueblo ignorado", poblacion: 67874 },
             ];
             censo.forEach(function (dato, i) {
-                document.querySelector("#grafico").innerHTML += '<g transform="translate(10, '+ 17 * (i + 1) +')"><rect x="0" y="0" width="'+ (dato.poblacion/2500) +'" height="10"></rect><text x="'+((dato.poblacion/2500)+5)+'" y="8" font-size="8">'+dato.region+'</text></g>';
+                document.querySelector("#grafico").innerHTML += '<g transform="translate(10, '+ 17 * (i + 1) +')"><rect x="0" y="0" width="'+ (dato.poblacion/5000) +'" height="10"></rect><text x="'+((dato.poblacion/5000)+5)+'" y="8" font-size="8">'+dato.region+'</text></g>';
             });
         </script>
     </body>
